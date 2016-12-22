@@ -17,3 +17,32 @@ This is the repository for our Big Data Project at Columbia University (<a href=
 >Dataset: Combine multiple data sets. Scrape distance data using Google Maps and other mapping software. Population and income data from census sources. 
 >Analytics: Spark and/or System G
 http://www.ee.columbia.edu/~cylin/course/bigdata/getprojectinfo.html
+
+# File
+## generate_distances
+This notebook takes as inputs the Gazetteer files for ZCTAs and metro areas and calculates the great circles distances.  It saves of the great-circle distances in a parquet file, while is the default file format for SparkSQL.
+## generate_driving_distances
+This notebook takes the great-circle distances and calculates the driving distance using the Bing Web API.  Each JSON return from Bing is saved as a unique JSON file with the name z_id concatenated with m_id.  For each request, the local filesystem is checked to see whether the file already exists and, if it does, then the local file is used.  If the file does not exist then the request is made to Bing.  The new JSON file is saved and the driving distance is recorded in the driving distance parquet file.
+The system used local files rather than S3 in order to speed up the processing of the collection of JSON files.
+## commuting_analysis
+This notebook calculates the commuting statistics and joins driving distances with the financial data.  It generates a CSV suitable for visualizations.
+## setup_systemg
+This notebook converts all the data to CSV files in the appropriate format for System G.  One of the key changes it makes it to append ‘m’ or ‘z’ to the numerical ‘id’ values, so that they are separable within System G.   
+## upload_driving_distances
+This notebook uploads the JSON files with driving routes to S3.
+## code_snippets
+This notebook is just a collection of code snippets that were found to be useful, but were not needed in the final work.
+
+## plot_gas_consumption.py	
+Plots the total annual gas consumption of each state 
+## plot_gas_per_auto.py	
+Plots the annual gallons of gas consumed per registered auto in each state 
+## plot_gas_per_capita.py	
+Plots the annual gallons of gas consumed per person in each state 
+## plot_miles_travelled.py	
+Plots the total annual miles travelled in each state
+## plot_miles_per_auto.py	
+Plots the annual miles travelled per registered car in each state 
+## plot_miles_per_capita.py	
+Plots the annual miles travelled per person in each state 
+
