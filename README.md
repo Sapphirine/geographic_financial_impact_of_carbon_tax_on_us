@@ -32,6 +32,8 @@ This notebook converts all the data to CSV files in the appropriate format for S
 This notebook uploads the JSON files with driving routes to S3.
 ## code_snippets
 This notebook is just a collection of code snippets that were found to be useful, but were not needed in the final work.
+## Visualizations-v2.ipynb
+Scripts to make visualizations.
 
 ## plot_gas_consumption.py	
 Plots the total annual gas consumption of each state 
